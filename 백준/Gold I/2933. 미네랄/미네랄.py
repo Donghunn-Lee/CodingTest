@@ -56,6 +56,33 @@ def check_cluster(p):
             if visited:
                 return visited
 
+# def fall_down(v):
+#     lowest = dict()
+#     fallen = []
+#     n = 1
+
+#     for i in enumerate(v):
+#         if i[1][1] not in lowest.keys():
+#             lowest[i[1][1]] = i[1][0]
+#         else:
+#             lowest[i[1][1]] = max(lowest[i[1][1]], i[1][0])
+
+#     while True:
+#         for i in lowest.keys():
+#             row = lowest[i] + n
+#             if 0 <= row <= R:
+#                 if row == R or cave[row][i] == 'x':
+#                     for j in v:
+#                         fallen.append([j[0] + (n - 1), j[1]])
+#                     for j in v:
+#                         if j not in fallen:
+#                             cave[j[0]][j[1]] = '.'
+#                     for j in fallen:
+#                         cave[j[0]][j[1]] = 'x'
+
+#                     return
+#         n += 1
+
 def fall_down(v):
     fallen = []
     n = 1
@@ -72,6 +99,7 @@ def fall_down(v):
                                 cave[j[0]][j[1]] = '.'
                         for j in fallen:
                             cave[j[0]][j[1]] = 'x'
+
                         return
         n += 1
 
