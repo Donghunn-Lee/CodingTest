@@ -1,117 +1,141 @@
-# 미네랄
-
+# CP template Version 1.006
+#import io
+import os
 import sys
-from collections import deque
-input = sys.stdin.readline
+#import string
+#from functools import cmp_to_key, reduce, partial
+#import itertools
+#from itertools import product
+#import collections
+#from collections import deque
+#from collections import Counter, defaultdict as dd
+#import math
+#from math import log, log2, ceil, floor, gcd, sqrt
+#from heapq import heappush, heappop
+#import bisect
+#from bisect import insort_left as il
+DEBUG = False
 
-R, C = map(int, input().split())
-cave = [list(input().rstrip()) for _ in range(R)]
-N = int(input())
-stick_height = list(map(int, input().split()))
-directions = ((-1, 0), (1, 0), (0, 1), (0, -1))
 
-def throwing_stick(h, n) :
-    if n % 2:
-        for i in range(1, C + 1):
-            if cave[h][C - i] == 'x':
-                cave[h][C - i] = '.'
-                return (h, C - i)
+def main(f=None):
+    init(f)
+    # ######## INPUT AREA BEGIN ##########
+
+    N, M = map(int, input().split())
+    L = M+1
+    mov = (L, -L, 1, -1)
+    brd = ['x'] * L*(N+1)
+    for y in range(0, N*L, L):
+        brd[y:y+M] = list(input().strip())
+    K = int(input().strip())
+    arr = list(map(lambda x: N - int(x), input().split()))
+    vis = [-1] * L*N + [K] * L
+    vis[M:L*N:L] = [K] * N
+    for k in range(K):
+        l, r, d = (M-1, -1, -1) if k%2 else (0, M, 1)
+        for xy in range(l + arr[k]*L, r + arr[k]*L, d):
+            if brd[xy] == 'x':
+                brd[xy] = '.'
+                for i in range(4):
+                    cxy = xy + mov[i]
+                    if vis[cxy] < k and brd[cxy] == 'x':
+                        que = [(cxy)]
+                        vis[cxy] = k
+                        bot = [-1] * M
+                        for nxy in que:
+                            if nxy > bot[nxy%L]:
+                                bot[nxy%L] = nxy
+                            for d in mov:
+                                if vis[nxy+d] < k and brd[nxy+d] == 'x':
+                                    vis[nxy+d] = k
+                                    que.append(nxy+d)
+
+                        if max(bot)//L == N-1:
+                            continue
+
+                        mdf = int(1e9)
+                        for txy in bot:
+                            if txy == -1:
+                                continue
+                            for kxy in range(txy, L*N, L):
+                                if brd[kxy+L] == 'x':
+                                    break
+                            mdf = min(mdf, kxy-txy)
+
+                        for nxy in sorted(que, reverse= True):
+                            brd[nxy], brd[nxy+mdf] = brd[nxy+mdf], brd[nxy]
+                        break
+                break
+
+    ans = []
+    for y in range(0, N*L, L):
+        ans.append(''.join(brd[y:y+M]))
+        
+    return '\n'.join(ans)
+
+    ######## INPUT AREA END ############
+
+
+# TEMPLATE ###############################
+
+
+enu = enumerate
+
+
+def For(*args):
+    return itertools.product(*map(range, args))
+
+
+def Mat(h, w, default=None):
+    return [[default for _ in range(w)] for _ in range(h)]
+
+
+def nDim(*args, default=None):
+    if len(args) == 1:
+        return [default for _ in range(args[0])]
     else:
-        for i in range(C):
-            if cave[h][i] == 'x':
-                cave[h][i] = '.'
-                return (h, i)
+        return [nDim(*args[1:], default=default) for _ in range(args[0])]
 
-def check_cluster(p):
-    v_cave = [[False] * C for _ in range(R)]
-    q = deque()
-    visited = []
-    cluster, ground = [], []
 
-    for c in directions:
-        ni, nj = p[0] + c[0], p[1] + c[1]
-        if 0 <= ni < R and 0 <= nj < C:
-            if cave[ni][nj] == 'x':
-                cluster.append((ni, nj))
+def setStdin(f):
+    global DEBUG, input
+    DEBUG = True
+    sys.stdin = open(f)
+    input = sys.stdin.readline
 
-    for cl_num in range(1, len(cluster)+1):
-        q.append(cluster[cl_num - 1])
-        visited.append(cluster[cl_num - 1])
-        if cl_num not in ground:
-            while q:
-                cx, cy = q.popleft()
-                for c in directions:
-                    ni, nj = cx + c[0], cy + c[1]
-                    if 0 <= ni < R and 0 <= nj < C:
-                        if cave[ni][nj] == 'x':
-                            if ni == R - 1 or v_cave[ni][nj] in ground:
-                                ground.append(cl_num)
-                                q = deque()
-                                visited = []
-                                break
-                            elif v_cave[ni][nj] == False :
-                                q.append((ni, nj))
-                                visited.append([ni, nj])
-                                v_cave[ni][nj] = cl_num
-            if visited:
-                return visited
 
-# def fall_down(v):
-#     lowest = dict()
-#     fallen = []
-#     n = 1
+def init(f=None):
+    global input
+    input = sys.stdin.readline #io.BytesIO(os.read(0, os.fstat(0).st_size)).readline
+    if os.path.exists("o"):
+        sys.stdout = open("o", "w")
+    if f is not None:
+        setStdin(f)
+    else:
+        if len(sys.argv) == 1:
+            if os.path.isfile("in/i"):
+                setStdin("in/i")
+            elif os.path.isfile("i"):
+                setStdin("i")
+        elif len(sys.argv) == 2:
+            setStdin(sys.argv[1])
+        else:
+            assert False, "Too many sys.argv: %d" % len(sys.argv)
 
-#     for i in enumerate(v):
-#         if i[1][1] not in lowest.keys():
-#             lowest[i[1][1]] = i[1][0]
-#         else:
-#             lowest[i[1][1]] = max(lowest[i[1][1]], i[1][0])
 
-#     while True:
-#         for i in lowest.keys():
-#             row = lowest[i] + n
-#             if 0 <= row <= R:
-#                 if row == R or cave[row][i] == 'x':
-#                     for j in v:
-#                         fallen.append([j[0] + (n - 1), j[1]])
-#                     for j in v:
-#                         if j not in fallen:
-#                             cave[j[0]][j[1]] = '.'
-#                     for j in fallen:
-#                         cave[j[0]][j[1]] = 'x'
+def pr(*args):
+    if DEBUG:
+        print(*args)
 
-#                     return
-#         n += 1
 
-def fall_down(v):
-    fallen = []
-    n = 1
-    while True:
-        for i in v:
-            row = i[0] + n
-            if [row, i[1]] not in v:
-                if 0 <= row <= R:
-                    if row == R or cave[row][i[1]] == 'x':
-                        for j in v:
-                            fallen.append([j[0] + (n - 1), j[1]])
-                        for j in v:
-                            if j not in fallen:
-                                cave[j[0]][j[1]] = '.'
-                        for j in fallen:
-                            cave[j[0]][j[1]] = 'x'
+def pfast(*args, end="\n", sep=' '):
+    sys.stdout.write(sep.join(map(str, args)) + end)
 
-                        return
-        n += 1
 
-for i in range(N):
-    hit_point = throwing_stick(R-stick_height[i], i)
+def parr(arr):
+    for i in arr:
+        print(i)
 
-    if hit_point :
-        breaked = check_cluster(hit_point)
-        if breaked:
-            fall_down(breaked)
 
-for i in range(R):
-    for j in range(C):
-        print(cave[i][j], end='')
-    print()
+if __name__ == "__main__":
+    print(main())
