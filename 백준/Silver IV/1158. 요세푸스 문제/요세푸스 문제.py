@@ -14,9 +14,5 @@ while josephus_per:
     result.append(str(josephus_per.pop(i-1)))
     i += K-1
 
+print('<'+', '.join(result)+'>')
 
-
-
-print('<',end='')
-print(', '.join(result), end='')
-print('>')
