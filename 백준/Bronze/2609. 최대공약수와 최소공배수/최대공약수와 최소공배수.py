@@ -8,9 +8,6 @@ def cal_gcd(a, b):
     else:
         return cal_gcd(b, a % b)
     
-
-
-
 if A != B:
     gcd = cal_gcd(max(A, B), min(A, B))
 else:
@@ -18,5 +15,4 @@ else:
 
 
 lcm = A * B // gcd
-print(gcd)
-print(lcm)
+print(f'{gcd}\n{lcm}')
