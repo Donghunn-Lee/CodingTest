@@ -5,10 +5,11 @@ A, B = map(int, input().split())
 def cal_gcd(a, b):
     if a % b == 0:
         return b
-    elif a !=0 and b!=0:
-        return cal_gcd(b, a % b)
     else:
-        return 1
+        return cal_gcd(b, a % b)
+    
+
+
 
 if A != B:
     gcd = cal_gcd(max(A, B), min(A, B))
