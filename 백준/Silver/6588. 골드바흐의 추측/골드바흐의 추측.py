@@ -9,30 +9,25 @@ flag = True
 
 for i in range(2, int(max ** 0.5) + 1):
     if primes[i]:
-        for j in range(i*2, max, i):
+        for j in range(i*i, max, i):
             primes[j] = False
 
-
 while flag:
-
     a = int(input())
-
     if a == 0:
         flag = False
     else:
         input_list.append(a)
 
-
-
-for N in input_list:
+for n in input_list:
     b = 0
-    if N == 0:
+    if n == 0:
         break
 
-    for a in range(3, N//2 + 1):
+    for a in range(3, n//2 + 1):
         if primes[a]:
-            if primes[N - a]:
-                ans.append(f'{N} = {a} + {N - a}')
+            if primes[n - a]:
+                ans.append(f'{n} = {a} + {n - a}')
                 b = 1
                 break
         
