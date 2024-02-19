@@ -16,7 +16,7 @@ while True:
     if N == 0:
         break
 
-    for a in range(3, N):
+    for a in range(3, N//2 + 1):
         if primes[a]:
             if primes[N - a]:
                 ans.append(f'{N} = {a} + {N - a}')
@@ -26,4 +26,4 @@ while True:
     if b == 0:
         ans.append('Goldbach\'s conjecture is wrong.')
 
-print('\n'.join(ans))
+sys.stdout.write('\n'.join(ans)+'\n')
