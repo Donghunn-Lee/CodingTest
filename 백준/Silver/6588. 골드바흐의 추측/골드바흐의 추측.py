@@ -3,15 +3,28 @@ import sys
 input = sys.stdin.readline
 max = 1000000
 primes = [True for _ in range(max)]
+input_list = []
 ans = []
+flag = True
 
 for i in range(2, int(max ** 0.5) + 1):
     if primes[i]:
         for j in range(i*2, max, i):
             primes[j] = False
 
-while True:
-    N = int(input())
+
+while flag:
+
+    a = int(input())
+
+    if a == 0:
+        flag = False
+    else:
+        input_list.append(a)
+
+
+
+for N in input_list:
     b = 0
     if N == 0:
         break
