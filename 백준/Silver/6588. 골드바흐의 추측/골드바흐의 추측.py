@@ -2,15 +2,16 @@
 import sys
 input = sys.stdin.readline
 max = 1000000
-primes = [True for _ in range(max)]
+primes = [False] + [True, False] * 500000
 input_list = []
 ans = []
 flag = True
 
-for i in range(2, int(max ** 0.5) + 1):
+for i in range(3, int(max ** 0.5) + 1):
     if primes[i]:
         for j in range(i*i, max, i):
             primes[j] = False
+
 
 while flag:
     a = int(input())
