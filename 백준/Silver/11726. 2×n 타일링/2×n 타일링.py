@@ -8,8 +8,8 @@ def DP (n):
     if n in box:
         return box[n]
     tmp = DP(n - 1) + DP(n - 2)
-    box[n] = tmp % 10007
+    box[n] = tmp 
 
     return box[n]
 
-print(DP(n))
+print(DP(n)%10007)
