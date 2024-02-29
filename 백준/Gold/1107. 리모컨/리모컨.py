@@ -1,22 +1,34 @@
-import sys
-input = sys.stdin.readline
-target = int(input())
-n = int(input())
-broken = list(map(int, input().split()))
+# 리모컨
 
-# 현재 채널에서 + 혹은 -만 사용하여 이동하는 경우
-min_count = abs(100 - target)
+target_channel = int(input())
+N = int(input())
 
-for nums in range(1000001):
-    nums = str(nums)
-    
-    for j in range(len(nums)):
-        # 각 숫자가 고장났는지 확인 후, 고장 났으면 break
-        if int(nums[j]) in broken:
-            break
+def channeling(tc, b):
+    init_channel = abs(100 - tc)
+    check = False
+    if b == 0:
+        return init_channel
 
-        # 고장난 숫자 없이 마지막 자리까지 왔다면 min_count 비교 후 업데이트
-        elif j == len(nums) - 1:
-            min_count = min(min_count, abs(int(nums) - target) + len(nums))
+    for i in range(1000001):
+        tmp = str(i)
 
-print(min_count)
+        for j in range(len(tmp)):
+            if int(tmp[j]) in b:
+                break
+            elif j == len(tmp) - 1:
+                sub = abs(int(tmp) - tc) + len(tmp)
+                if check == True:
+                    if init_channel < sub:
+                        return init_channel
+                if sub == init_channel:
+                    check = True
+                init_channel = min(init_channel, sub)
+
+    return init_channel
+
+if N!= 0:
+    broken = list(map(int, input().split()))
+    print(channeling(target_channel, broken))
+else:
+    print(min(abs(100 - target_channel), len(str(target_channel))))
+
