@@ -1,13 +1,13 @@
 # 2048 (Easy)
-import copy
-
-# dfs로 모든 방향의 경우를 완전탐색해야 하는 문제.
+import copy, sys
+input = sys.stdin.readline
+# dfs로 모든 방향의 경우를 완전탐색해야 하는 문제
 # 각각의 방향에 따라 2중 for문 내 변수위치를 다르게 해야 하기 때문에 각각 함수 구성
 
 def push_right(board):
     for i in range(N):
         cur = N - 1 # 시작지점에 커서 표시
-        for j in range(N - 1, -1, -1):  # 밀려는 방향의 끝에서 시작
+        for j in range(N - 2, -1, -1):  # 밀려는 방향의 끝에서 시작
             if board[i][j]:
                 # tmp 에 현재 값을 저장, 현재 값에는 우선 0을 저장
                 tmp, board[i][j] = board[i][j], 0   
@@ -35,7 +35,7 @@ def push_right(board):
 def push_left(board):
     for i in range(N):
         cur = 0
-        for j in range(N):
+        for j in range(1, N):
             if board[i][j]:
                 tmp, board[i][j] = board[i][j], 0
             
@@ -53,7 +53,7 @@ def push_left(board):
 def push_up(board):
     for j in range(N):
         cur = 0
-        for i in range(N):
+        for i in range(1, N):
             if board[i][j]:
                 tmp, board[i][j] = board[i][j], 0
             
@@ -71,7 +71,7 @@ def push_up(board):
 def push_down(board):
     for j in range(N):
         cur = N - 1
-        for i in range(N - 1, -1, -1):
+        for i in range(N - 2, -1, -1):
             if board[i][j]:
                 tmp, board[i][j] = board[i][j], 0
             
