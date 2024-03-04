@@ -29,17 +29,10 @@ if __name__ == '__main__':
         a, b = map(int, input().split())
         relationship[a].append(b)
         relationship[b].append(a)
-    
-    # 시간 단축을 위해 친구 관계가 적은 사람부터 조사하기 위해 order 리스트 생성
-    # 친구 관계가 적을수록 해당 사람이 ABCDE 중 A 또는 E일 가능성이 높기 때문
-    order = []
-    for i in range(N):
-        order.append([i, len(relationship[i])])
-    order.sort(key = lambda order: order[1])
-    
+
     # ABCDE중 시작인 A를 0번 부터 N - 1 번까지 각각 대입
     # dfs에서 i번째를 A로 삼아 나머지 친구들을 계산함
-    for i, j in order:
+    for i in range(N):
         visited[i] = True
         dfs(relationship, i, visited, 1)
         visited[i] = False
