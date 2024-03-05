@@ -1,26 +1,35 @@
-# 연결 요소의 개수
+import sys
+input = sys.stdin.readline
 
-def dfs(graph, v, visited):
-    visited[v] = True
-    
-    for i in graph[v]:
-        if not visited[i]:
-            dfs(graph, i, visited)
+node, edge = map(int, input().split())
+seqnum = [0] * (node+1)
+seq = 1
+ans = node
 
-if __name__ == "__main__":
-    N, M = map(int, input().split())
-    graph = [[] for _ in range(N + 1)]
-    visited = [False] * (N + 1)
-    count = 0
+for _ in range(edge):
+    if ans==1:
+        input()
+        continue
+    valid = True
+    a, b = map(int, input().split())
+    if seqnum[a]==0 and seqnum[b]==0:
+        seqnum[a] = seqnum[b] = seq
+        seq += 1
+    elif seqnum[a]==0:
+        seqnum[a] = seqnum[b]
+    elif seqnum[b]==0:
+        seqnum[b] = seqnum[a]
+    else:
+        if seqnum[a]==seqnum[b]:
+            valid = False
+        else:
+            low_s = min(seqnum[a], seqnum[b])
+            high_s = max(seqnum[a], seqnum[b])
+            for i in range(1, node+1):
+                if seqnum[i]==high_s:
+                    seqnum[i] = low_s
+    # print(seqnum) ###
+    if valid:
+        ans -= 1
 
-    for i in range(M):
-        u, v = map(int, input().split())
-        graph[u].append(v)
-        graph[v].append(u)
-    
-    for i in range(1, N + 1):
-        if not visited[i]:
-            dfs(graph, i, visited)
-            count += 1
-
-    print(count)
+print(ans)
