@@ -12,13 +12,8 @@ def cal_NGE(seq, fre):
     # 최근 빈도수보다 지금 j의 빈도수가 더 적거나 같을 경우 스택에 쌓음
     # 오등큰수가 나타나면 스택 안의 수에 대해서도 오등큰수인지 비교하고 result에 저장
     for i, j in enumerate(seq):
-        if stack and stack[-1][1] < fre[j]:
-            for k in range(len(stack) - 1, -1, -1):
-                if stack[k][1] < fre[j]:
-                    result[stack[k][0]] = j
-                    stack.pop()
-                else:
-                    break
+        while stack and stack[-1][1] < fre[j]:
+            result[stack.pop()[0]] = j
 
         # 지금은 j와 이전 스택과의 비교이므로 계산 후에는 스택에 j도 넣어줘야 함
         stack.append([i, fre[j]])
