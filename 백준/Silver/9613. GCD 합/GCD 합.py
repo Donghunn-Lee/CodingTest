@@ -13,7 +13,7 @@ def sum_gcd(seq):
 
     for i in range(len(seq)):
         for j in range(i + 1, len(seq)):
-            tmp_sum += cal_gcd(max(seq[i], seq[j]), min(seq[i], seq[j]))
+            tmp_sum += cal_gcd(seq[i], seq[j])
     
     return tmp_sum
 
