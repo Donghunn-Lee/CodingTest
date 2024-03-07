@@ -5,7 +5,6 @@ input = sys.stdin.readline
 def cal_gcd(a, b):
     while a % b != 0:
         a, b = b, a % b
-
     return b
 
 def sum_gcd(seq):
@@ -17,8 +16,6 @@ def sum_gcd(seq):
     
     return tmp_sum
 
-        
-
 if __name__ == "__main__":
     t = int(input())
     ans = []
@@ -28,6 +25,3 @@ if __name__ == "__main__":
         ans.append(sum_gcd(seq))
     
     print('\n'.join(map(str, ans)))
-
-
-    
