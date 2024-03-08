@@ -1,29 +1,23 @@
 # 연속합
+
 import sys
 input = sys.stdin.readline
 
 
 def continuousSum(seq):
-    dp = []
-    tmp = 0
+    max_sum = seq[0]
+    current = 0
 
-    for i in seq:
-        if i > 0:
-            tmp += i
+    # 0 이상의 수라면 current에 계속 더해서 한 묶음으로 만듦.
+    # 만약 current가 음수가 된다면 앞의 연속합은 답이 아니므로 현재 n으로 초기화
+    for n in seq:
+        if current >= 0:
+            current += n
         else:
-            if tmp:
-                dp.append(tmp)
-                tmp = 0
-            dp.append(i)
-    if not dp and tmp:
-        dp.append(tmp)
-    
-    result = [dp[0]] + [0] * (len(dp)-1)
-
-    for i in range(1, len(dp)):
-        result[i] = max(dp[i], result[i-1] + dp[i])
-        
-    return max(result)
+            current = n
+        if current > max_sum:
+            max_sum = current
+    return max_sum
     
 
 if __name__ == "__main__":
