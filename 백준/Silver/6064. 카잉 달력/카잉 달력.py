@@ -3,30 +3,32 @@
 import sys
 input = sys.stdin.readline
 
-# 한 사이클의 최댓값(= 최소공배수)를 구하기 위한 최대공약수 계산
+# 최소공배수를 구하기 위한 최대공약수 계산
 def gcd(a, b):
     while a % b != 0:
         a, b = b, a % b
     return b
 
 # 네 변수를 입력받아 해를 구하거나 해가 없음을 판별하여 반환하는 함수
+# 1씩 더하면 시간초과가 나므로, x를 고정시킨 후 그 배수로 y를 구하는 방식으로
 def khaing_calendar(m, n, x, y):
-    end_year = (m * n) // gcd(m, n) # 한 사이클, 최대공배수 계산
-    target_year = (x, y)    # x, y를 변수로 쓰기 위해 타겟 년도를 저장
-    y, year = x, x   # 첫째 년도인 1, 1로 초기화
+    end_year = (m * n) // gcd(m, n) # 최댓값(= 한 사이클, = m, n의 최소공배수) 계산
+    target_year = y    # 구하는 목푯값인 y를 저장
+    y, year = x, x   # m씩 더하며 답을 찾기 위해 x를 기준으로 year를 초기화
 
     # 최댓값을 초과하면 종료
     while year <= end_year:
-        # y값 조정
+
+        # x는 고정이므로 y값만 조정
         if y > n:
             y %= n
             if y == 0:
                 y = n
 
-        if (x, y) == target_year :    # 현재 변수가 찾고 있는 년도인 경우 종료
+        # 현재 변수가 찾고 있는 년도인 경우 종료
+        if y == target_year :
             return year
         
-        # x와 y를 각각 1씩 더하면 시간초과, m씩 더함
         y += m
         year += m
     
