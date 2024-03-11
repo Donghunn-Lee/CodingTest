@@ -26,14 +26,12 @@ def bfs(ap):
 
                 while q:
                     ci, cj = q.popleft()
-
                     for d in dir:
                         ni, nj = ci + d[0], cj + d[1]
                         if 0 <= ni < N and 0 <= nj < N and (ni, nj) not in visited:
                             if ap[ni][nj] == '1':
                                 q.append((ni, nj))
                                 n += 1  #발견시 덱에 추가함과 동시에 n += 1.
-
                             visited.append((ni, nj))
                 # while 종료 == 해당 구간 탐색 끝이므로 n을 ap_c에 추가.
                 ap_c.append(n)
