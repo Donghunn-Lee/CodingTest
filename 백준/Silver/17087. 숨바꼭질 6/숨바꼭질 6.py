@@ -8,22 +8,16 @@
 
 import sys
 input = sys.stdin.readline
-sys.setrecursionlimit(10**6)
-# 두 수만이 아니라 수열의 전체 원소의 최대공약수를 구하는 함수.
-# 수열과 시작 인덱스를 받아서 인덱스가 수열 마지막에 도달하면 해당 값을 반환.
-# 참조 값으로 받은 리스트이므로 처음 넣은 리스트 자체가 바뀜.
-def gcd_seq(seq, i):
-    if i == N - 1:
-        return seq[i]
 
-    while seq[i] % seq[i + 1] != 0:
-        seq[i], seq[i + 1] = seq[i + 1], seq[i] % seq[i + 1]
-
-    return gcd_seq(seq, i + 1)
+# 최대공약수 계산 함수.
+def gcd(a, b):
+    while a % b != 0:
+        a, b = b, a % b
+    return b
 
 # 수빈이가 걸으며 동생을 찾는 함수.
 # 시작점과 찾을 대상들을 입력, 시작점과의 차이를 계산해서 저장.
-# 이후 수열 최대공약수 계산 함수를 사용해 답을 반환.
+# 이후 두 수의 최대공약수를 구하고, 그 결과와 다음 수의 최대공약수를 다시 계산하여 최종 result를 반환.
 
 def walking(start, target):
     distance = []
@@ -31,7 +25,12 @@ def walking(start, target):
     for i in target:
         distance.append(abs(i - start))
 
-    return gcd_seq(distance, 0)
+    result = distance[0]
+
+    for i in range(1, len(distance)):
+        result = gcd(result, distance[i])
+
+    return result
 
 if __name__ == "__main__":
     N, S = map(int, input().split())
