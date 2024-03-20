@@ -26,9 +26,7 @@ def sol(cmd, lst):
         lst = lst[left : (N - right)]
 
         # rev 여부에 따라 처리 후 출력
-        if rev:
-            lst.reverse()
-        return ''.join(str(lst).split())   
+        return f'[{",".join(reversed(lst) if rev else lst)}]'  
 
 if __name__ == "__main__":
     T = int(input())
@@ -38,7 +36,7 @@ if __name__ == "__main__":
         error = False
         cmd = input().rstrip()
         N = int(input())
-        lst = eval(input().rstrip())
+        lst = input().strip("[]\n").split(",")
 
         ans.append(sol(cmd, lst))
        
