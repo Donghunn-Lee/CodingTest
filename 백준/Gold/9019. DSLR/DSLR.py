@@ -17,7 +17,7 @@ def bfs(a, b):
         cur = q.popleft()
 
         d = (cur * 2) % 10000
-        s = cur - 1 if cur else 9999
+        s = (cur - 1) % 10000
         tmp = str(cur)
         tmp = '0' * (4 - len(tmp)) + tmp
         l = int(tmp[1:] + tmp[0])
