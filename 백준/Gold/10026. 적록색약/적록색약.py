@@ -7,7 +7,7 @@
 # 끝내 포기하고 찾아보니 그냥 R과 G를 합치고 한 번 더 탐색하면 되는 문제였음.. 오기부리지 말걸 3시간 좀 더 날린 듯.
 
 import sys
-sys.setrecursionlimit(10000)
+sys.setrecursionlimit(8000)
 input = sys.stdin.readline
 
 # 입력 색을 기준으로 구역을 찾는 함수.
