@@ -7,7 +7,7 @@
 # 끝내 포기하고 찾아보니 그냥 R과 G를 합치고 한 번 더 탐색하면 되는 문제였음.. 오기부리지 말걸 3시간 좀 더 날린 듯.
 
 import sys
-sys.setrecursionlimit(8000)
+sys.setrecursionlimit(4000)
 input = sys.stdin.readline
 
 # 입력 색을 기준으로 구역을 찾는 함수.
@@ -20,12 +20,23 @@ def dfs(visited, color, ci, cj):
             if grid[ni][nj] == color:
                 dfs(visited, color, ni, nj)
 
+def dfs_RG(visited, color, ci, cj):
+    visited[ci][cj] = True
+
+    for d in dir:
+        ni, nj = ci + d[0], cj + d[1]
+        if 0 <= ni < N and 0 <= nj < N and not visited[ni][nj]:
+            if (grid[ni][nj] =='R' and color == 'G') or (grid[ni][nj] == 'G' and color == 'R'):
+                dfs_RG(visited, color, ni, nj)
+            elif grid[ni][nj] == color:
+                dfs_RG(visited, color, ni, nj)
+
 # R을 G로 변환해서 적록색약인 시점을 만드는 함수.
-def convert_R_to_G():
-    for i in range(N):
-        for j in range(N):
-            if grid[i][j] == 'R':
-                grid[i][j] = 'G'
+# def convert_R_to_G():
+#     for i in range(N):
+#         for j in range(N):
+#             if grid[i][j] == 'R':
+#                 grid[i][j] = 'G'
 
 
 if __name__ == "__main__":
@@ -44,7 +55,7 @@ if __name__ == "__main__":
                 count += 1
 
     # R과 G 병합.
-    convert_R_to_G()
+    # convert_R_to_G()
 
     visited_ = [[False] * N for _ in range(N)]
 
@@ -52,7 +63,7 @@ if __name__ == "__main__":
     for i in range(N):
         for j in range(N):
             if not visited_[i][j]:
-                dfs(visited_, grid[i][j], i, j)
+                dfs_RG(visited_, grid[i][j], i, j)
                 count_RG += 1
 
     print(count, count_RG)
