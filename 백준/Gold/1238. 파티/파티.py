@@ -29,7 +29,6 @@ def dijkstra(start, edge):
 
     return distance
 
-
 if __name__ == "__main__":
     N, M, X = map(int, input().split())
     graph = [[] for _ in range(N + 1)]
