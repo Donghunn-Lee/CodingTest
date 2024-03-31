@@ -30,11 +30,9 @@ def dijkstra(start, edge):
     # start 노드에서 다른 모든 노드까지의 최소 비용을 저장한 리스트를 리턴.
     return dist
 
-
 if __name__ == "__main__":
     N, E = map(int, input().split())
     graph = [[] for _ in range(N + 1)]
-
     for _ in range(E):
         a, b, c = map(int, input().split())
         graph[a].append((b, c))
