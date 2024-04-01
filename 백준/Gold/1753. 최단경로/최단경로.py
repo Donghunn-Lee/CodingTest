@@ -32,7 +32,8 @@ if __name__ == "__main__":
     V, E = map(int, input().split())
     K = int(input())
     graph = [[] for _ in range(V + 1)]
-    # ans = []
+    ans = []
+
     for _ in range(E):
         u, v, w = map(int, input().split())
         graph[u].append((v, w))
@@ -41,9 +42,9 @@ if __name__ == "__main__":
 
     for i in range(1, V + 1):
         if path[i] == INF:
-            print("INF")
+            ans.append("INF")
             continue
 
-        print(path[i])
+        ans.append(f"{path[i]}")
 
-    # print("\n".join(ans))
+    print("\n".join(ans))
