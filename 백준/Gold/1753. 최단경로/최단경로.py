@@ -33,7 +33,6 @@ if __name__ == "__main__":
     K = int(input())
     graph = [[] for _ in range(V + 1)]
     # ans = []
-
     for _ in range(E):
         u, v, w = map(int, input().split())
         graph[u].append((v, w))
