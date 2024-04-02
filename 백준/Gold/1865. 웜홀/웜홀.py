@@ -38,6 +38,7 @@ if __name__ == "__main__":
             S, E, T = map(int, input().split())
             graph.append((S, E, T))
             graph.append((E, S, T))
+
         for _ in range(W):
             S, E, T = map(int, input().split())
             graph.append((S, E, -T))
