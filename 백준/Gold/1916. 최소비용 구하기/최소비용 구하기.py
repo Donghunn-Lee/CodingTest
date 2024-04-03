@@ -19,7 +19,6 @@ def dijkstra(s):
 
         for nxt_cost, nxt in graph[cur]:
             tmp = nxt_cost + cur_cost
-
             if min_cost[nxt] > tmp:
                 min_cost[nxt] = tmp
                 heapq.heappush(q, (tmp, nxt))
