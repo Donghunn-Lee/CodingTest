@@ -6,8 +6,8 @@ import sys, heapq
 input = sys.stdin.readline
 INF = 1e10
 
-def dijkstra(s):
-    min_cost = [INF] * (N + 1)
+def dijkstra(graph, s, dest, n):
+    min_cost = [INF] * (n + 1)
     q = []
     heapq.heappush(q, (0, s))
 
@@ -17,13 +17,17 @@ def dijkstra(s):
         if min_cost[cur] < cur_cost:
             continue
 
+        # 목적지가 주어지는 경우, 음수 간선이 없는 이상 현재 노드가 목적지일 때의 반복은 의미가 없으므로 패스.
+        if cur == dest:
+            break
+        
         for nxt_cost, nxt in graph[cur]:
-            tmp = nxt_cost + cur_cost
-            if min_cost[nxt] > tmp:
-                min_cost[nxt] = tmp
-                heapq.heappush(q, (tmp, nxt))
+            nxt_cost += cur_cost
+            if min_cost[nxt] > nxt_cost:
+                min_cost[nxt] = nxt_cost
+                heapq.heappush(q, (nxt_cost, nxt))
     
-    return min_cost
+    return min_cost[dest]
 
 
 if __name__ == "__main__":
@@ -37,4 +41,4 @@ if __name__ == "__main__":
     
     start, dest = map(int, input().split())
 
-    print(dijkstra(start)[dest])
+    print(dijkstra(graph, start, dest, N))
