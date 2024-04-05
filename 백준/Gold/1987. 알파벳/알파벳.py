@@ -7,7 +7,8 @@
 # +++ 재귀 dfs로 풀긴 했으나, 7800ms. 재귀 방식 자체도 문제고 방문 체크도 문제인 것 같아서 검색후 다른 코드를 참고.
 # visited의 각 좌표에 방문한 문자들을 순서대로 넣어서, 그 길이로 ans를 초기화.
 # 그리고 visited에 저장된 문자를 비교해서 방문 여부를 확인.
-# bfs에선 popleft를 쓰지만, dfs
+# bfs에선 popleft를 쓰지만, dfs에선 pop을 사용하므로써 너비 우선이 아닌 깊이 우선이 된다는 사실을 명심.
+
 import sys
 input = sys.stdin.readline
 
@@ -25,6 +26,7 @@ def dfs(si, sj, alpha):
         if ans < len(alpha):
             ans = len(alpha)
         
+        # 최대 알파벳 수에 도달한 경우 종료.
         if ans == 26:
             return ans
 
@@ -33,7 +35,7 @@ def dfs(si, sj, alpha):
 
             if 0 <= ni < R and 0 <= nj < C and graph[ni][nj] not in alpha:
                 nxt_alpha = alpha + graph[ni][nj]
-
+                
                 if visited[ni][nj] != nxt_alpha:
                     visited[ni][nj] = nxt_alpha
                     stack.append((ni, nj, nxt_alpha))
