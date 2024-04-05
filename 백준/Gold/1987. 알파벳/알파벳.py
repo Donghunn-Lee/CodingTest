@@ -5,21 +5,24 @@
 # 백트래킹까지 해줘야겠다고 생각함. 입력 수가 20*20으로 현저히 적은 것에서도 추측함.
 # 방문한 좌표가 아니라 문자가 기준이므로, 이동가능한 최대 칸 수를 저장할 리스트와 방문한 문자 리스트를 각각 생성.
 
+# +++ 리스트를 썼다가 시간초과. in을 쓸 때 시간복잡도가 리스트는 O(n)이지만 집합은 O(1)이므로 집합을 써야함.
+# 그동안 graph문제에서 어떤 건 집합, 어떤 건 리스트를 써서 무슨 차이인가 했는데, in의 시간복잡도 차이였음.
+
 import sys
 input = sys.stdin.readline
 
-def dfs(ci, cj, dist):
+def dfs(ci, cj, count):
+    global ans
     # 함수 실행 시 visited_alpha에 문자 추가.
     visited_alpha.add(graph[ci][cj])
-    
-    # 현재 좌표에 이동해온 거리를 할당.
-    visited_dist[ci][cj] = max(visited_dist[ci][cj], dist)
+    # 거리 최댓값 갱신
+    ans = max(ans, count)
 
     for d in dir:
         ni, nj = ci + d[0], cj + d[1]
         if 0 <= ni < R and 0 <= nj < C and graph[ni][nj] not in visited_alpha:
-            # 인덱스 내에서 이동하며, dist + 1.
-            dfs(ni, nj, dist + 1)
+            # 인덱스 내에서 이동하며, count + 1.
+            dfs(ni, nj, count + 1)
     
     # 함수에서 입력받은 좌표에서 갈 수 있는 방향을 모두 확인했다면 백트래킹을 위해 제거.
     visited_alpha.remove(graph[ci][cj])
@@ -29,9 +32,9 @@ if __name__ == "__main__":
     R, C = map(int, input().split())
     graph = [list(input().rstrip()) for _ in range(R)]
     visited_alpha = set()
-    visited_dist = [[0] * C for _ in range(R)]
     dir = ((1, 0), (0, 1), (-1, 0), (0, -1))
+    ans = 0
 
     dfs(0, 0, 1)
 
-    print(max(map(max, visited_dist)))
+    print(ans)
