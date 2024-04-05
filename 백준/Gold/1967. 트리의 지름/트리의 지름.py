@@ -5,7 +5,7 @@
 # 복붙해서 좀만 고칠까 하다가 그냥 다시 풀어 봐야겠다는 생각으로 다시 풀었음.
 # 트리의 임의의 한 정점에서 최대 거리에 있는 정점은, 트리의 지름을 이루는 양 정점 중 하나라는 규칙을 이용해야함.
 import sys
-sys.setrecursionlimit(11000)
+sys.setrecursionlimit(6000)
 input = sys.stdin.readline
 
 def dfs(graph, visited, start, dist):
