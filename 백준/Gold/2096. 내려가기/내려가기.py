@@ -31,9 +31,7 @@ def dp(n):
 
     return max(max_dp), min(min_dp)
 
-
 if __name__ == "__main__":
     N = int(input())
     ans = dp(N)
-
     print(ans[0], ans[1])
