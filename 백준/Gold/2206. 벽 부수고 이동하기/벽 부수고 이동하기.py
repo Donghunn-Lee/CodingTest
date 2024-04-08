@@ -18,7 +18,7 @@ def bfs(i, j, k):
 
     # 벽 돌파 여부를 모두 체크하는 3차원 리스트로 생성.
     visited = [[[False] * M for _ in range(N)] for _ in range(2)]
-    visited[i][j][k] = 1    # 시작 지점 초기화.
+    visited[0][j][k] = visited[1][j][k] = 1    # 시작 지점 초기화.
 
     while deq:
         broke, ci, cj = deq.popleft()
