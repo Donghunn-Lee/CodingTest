@@ -34,15 +34,16 @@ def bfs(i, j, k):
             if 0 <= ni < N and 0 <= nj < M:
                 
                 # 다음 칸이 갈 수 있는 길이고 아직 방문하지 않은 경우 deq에 추가.
-                if graph[ni][nj] == '0' and not visited[broke][ni][nj]:
-                    visited[broke][ni][nj] = visited[broke][ci][cj] + 1
-                    deq.append((broke, ni, nj))
+                if graph[ni][nj] == '0':
+                    if not visited[broke][ni][nj]:
+                        visited[broke][ni][nj] = visited[broke][ci][cj] + 1
+                        deq.append((broke, ni, nj))
 
                 # 다음 칸이 벽이며 아직 벽을 하나도 뚫지 않은 경우,
                 # 벽을 뚫은 경로를 저정하는 visited에 현재 경로의 값 + 1을 할당.
                 # 이후 덱에도 기존 0이었던 broke가 아닌 1로 바꾸어 추가.
                 # 이 때 추가된 튜플을 기점으로 visited[1][][]의 맵이 갱신되기 시작하여 [0]와 병행하여 탐색.
-                elif graph[ni][nj] == '1' and not broke:
+                elif not broke:
                     visited[1][ni][nj] = visited[broke][ci][cj] + 1
                     deq.append((1, ni, nj))
 
