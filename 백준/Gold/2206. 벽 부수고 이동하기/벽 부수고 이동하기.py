@@ -17,9 +17,9 @@ def bfs(i, j, k):
     deq.append((i, j, k))
 
     # 벽 돌파 여부를 모두 체크하는 3차원 리스트로 생성.
-    visited = [[[False] * M for _ in range(N)] for _ in range(2)]
+    visited = [[[0] * M for _ in range(N)] for _ in range(2)]
     visited[0][j][k] = visited[1][j][k] = 1    # 시작 지점 초기화.
-
+    dir = ((1, 0), (0, 1), (-1, 0), (0, -1))
     while deq:
         broke, ci, cj = deq.popleft()
 
@@ -27,7 +27,7 @@ def bfs(i, j, k):
         if (ci, cj) == (N - 1, M - 1):
             return visited[broke][ci][cj]
 
-        for di, dj in ((1, 0), (0, 1), (-1, 0), (0, -1)):
+        for di, dj in dir:
             ni, nj = ci + di, cj + dj
             
             # 인덱스 범위 체크.
