@@ -9,15 +9,15 @@ def fractal_triangle(n):
     for i in range(11, n + 1):
         seq.append(seq[i - 1] + seq[i- 5])
 
-    return str(seq[n])
+    print(seq[n])
 
 
 if __name__ == "__main__":
     T = int(input())
-    ans = []
+    
 
     for _ in range(T):
         N = int(input())
-        ans.append(fractal_triangle(N))
+        fractal_triangle(N)
     
-    print('\n'.join(ans))
+    
