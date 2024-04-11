@@ -8,6 +8,7 @@
 
 # 거의 2시간쯤 끙끙대다가 검색해서 들어간 글의 서두에 '공기를 기준으로 치즈를 탐색' 이라는 얘기가 있어서 충격.
 # 결국 해법은 공기를 기준으로 치즈를 만나면 카운트를 + 1씩 하고, bfs이후 치즈들을 공기로 바꾸고 시간을 더하는 것.
+
 import sys
 from collections import deque
 input = sys.stdin.readline
