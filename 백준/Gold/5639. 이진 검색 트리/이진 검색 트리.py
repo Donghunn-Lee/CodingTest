@@ -6,7 +6,7 @@
 # 해법은 현재 노드를 기준으로 왼쪽과 오른쪽을 나누어 탐색했어야 했음.
 
 import sys
-sys.setrecursionlimit(8000)
+sys.setrecursionlimit(20000)
 #   후위 순환
 def postorder(root, end):
     global ans
