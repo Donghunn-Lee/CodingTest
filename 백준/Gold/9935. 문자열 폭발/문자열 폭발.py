@@ -15,15 +15,11 @@ def removal_bomb(string, bomb):
 
     # 입력 문자열보다 폭탄 길이가 더 크면 폭탄이 존재 할 수 없으므로 그대로 반환.
     if string_length < bomb_length:
-        return ''.join(map(str, string))
+        return ''.join(map(str, string))  
 
-    # result를 폭탄 길이보다 1 적은 만큼 string에서 popleft로 추가.
-    for _ in range(bomb_length - 1):
-        result.append(string.popleft())    
-
-    # string을 모두 사용할 때까지 반복
-    while string:
-        result.append(string.popleft())
+    # string의 원소를 반복.
+    for s in string:
+        result.append(s)
 
         # result의 뒤에서 폭탄 길이만큼의 문자가 폭탄과 일치할 경우, 뒤에서부터 폭탄 수만큼 제거..
         if result[-bomb_length :] == bomb:
