@@ -25,10 +25,9 @@ def removal_bomb(string, bomb):
     while string:
         result.append(string.popleft())
 
-        # result의 뒤에서 폭탄 길이만큼의 문자가 폭탄과 일치할경우, 폭탄 수 만큼 pop. remove나 del은 O(N)까지라 불가.
+        # result의 뒤에서 폭탄 길이만큼의 문자가 폭탄과 일치할 경우, 뒤에서부터 폭탄 수만큼 제거..
         if result[-bomb_length :] == bomb:
-            for _ in range(bomb_length):
-                result.pop()
+            del result[-bomb_length:]
     
     # 폭탄 제거 후 result에 문자가 남아있는지 여부에 따라 출력문을 반환.
     if result:
