@@ -13,10 +13,9 @@ def find_warm_hole(warm_hole):
                     warm_hole[warm_hole[num]] = (i, j)
 
 
-def pin_ball(si, sj, dir, dp):
+def pin_ball(si, sj, dir):
     start_point = (si, sj)
     stack = [(si, sj, dir)]
-    visited = []
     score = 0
 
     while stack:
@@ -63,14 +62,13 @@ if __name__ == "__main__":
             }
         warm_hole = dict()
         find_warm_hole(warm_hole)
-        dp = dict()
         ans = 0
 
         for i in range(N):
             for j in range(N):
                 if game_board[i][j] == 0:
                     for dir in ((1, 0), (0, 1), (-1, 0), (0, -1)):
-                        ans = max(ans, pin_ball(i, j, dir, dp))
+                        ans = max(ans, pin_ball(i, j, dir))
 
         output.append(f'#{t} {ans}')
     
