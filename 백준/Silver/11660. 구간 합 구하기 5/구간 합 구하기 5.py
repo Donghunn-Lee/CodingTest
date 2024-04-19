@@ -3,7 +3,6 @@
 # 당연히 안 될 걸 알고 그냥 sum으로 한 번 풀어봤다가 시간초과. 그저 시간 복잡도 계산을 해 보고 싶었음.
 # 분류를 확인하니 그럴 것 같긴 했지만 dp이길래, 어떻게 활용할 수 있을까 고민하다가 해답을 떠올려냄.
 # dp 테이블에 (0, 0)에서부터 어떤 좌표까지의 합을 계산하여 저장하면 약간의 계산으로 풀 수 있었음.
-
 import sys
 input = sys.stdin.readline
 
@@ -52,6 +51,5 @@ if __name__ == "__main__":
                 result += dp[x1 - 1][y1 - 1]
 
         ans.append(result)
-            
-    
+              
     print("\n".join(map(str, ans)))
