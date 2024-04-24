@@ -10,7 +10,6 @@
 # deque는 많이 써 봤지만 appendleft는 처음 써 봄. 너비 우선으로 도는 중간에 깊이 우선을 섞는 느낌인가?
 # 그렇게 입력값의 배수들이 deq에서 비교적 먼저 꺼내지게 되고, 그 수 들에서도 +1과 -1 이동 역시 계산됨.
 # 이처럼 해야 시간 초과와 메모리 초과 없이 답을 구할 수 있음.
-
 import sys
 from collections import deque
 input = sys.stdin.readline
@@ -38,6 +37,9 @@ def bfs(start, target):
         if cur == target:
             return time[cur] + zero_start
 
+        # 조건의 순서는 중요하게 생각하지 않았는데, cur - 1보다 cur + 1을 먼저 넣게 될 경우엔 4 6이 반례로 등장함.
+        # if문으로 target에 도달하자마자 리턴하도록 해 놓았기 때문에,
+        # cur + 1이 먼저 들어갈 경우 4 -> 5 -> 6이 4 -> 3 -> 6보다 먼저 실행되어 1이 아닌 2가 출력됨.
         for nxt in (cur - 1, cur + 1, cur * 2):
 
             # bfs에선 처음 값에 방문 했을 때가 최소 시간(비용)이므로, time[nxt] == 0 조건을 달아 무한 루프 제거.
