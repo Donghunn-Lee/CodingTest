@@ -9,7 +9,6 @@ def dfs(start, count):
     if count == M:
         ans.append(" ".join(map(str, seq)))
         return
-    
     if start > N:
         return
     
