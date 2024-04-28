@@ -5,7 +5,7 @@
 # 다만 시간 효율을 위해 집의 위치와 치킨집의 위치를 먼저 다 구하고, 모든 거리를 다 계산한 다음 답을 구해야겠다고 생각.
 
 import sys
-sys.setrecursionlimit(10**6)
+sys.setrecursionlimit(10**3)
 input = sys.stdin.readline
 INF = 1e5
 
