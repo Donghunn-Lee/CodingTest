@@ -6,7 +6,6 @@
 # 미세먼지 군집들의 좌표를 구하고, 이를 바탕으로 미세먼지 확산을 graph에 반영.
 # 공기청정기의 위치를 기준으로 상단과 하단의 공기 순환을 진행.
 # 이를 T초 동안 반복.
-
 import sys
 input = sys.stdin.readline
 
@@ -111,4 +110,3 @@ if __name__ == "__main__":
     cleaning_circulation(graph, air_cleaner_pos, T)
 
     print(sum(map(sum, graph[:])))
-    
