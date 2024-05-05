@@ -7,7 +7,6 @@ def backtracking(count):
     if count == M:
         print(" ".join(map(str, ans)))
         return 
-    
     for i in seq:
         if not ans or ans[-1] <= i:
             ans.append(i)
