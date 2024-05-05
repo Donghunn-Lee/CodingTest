@@ -1,4 +1,4 @@
-# N과 M (5)
+# N과 M (9)
 
 import sys
 input = sys.stdin.readline
@@ -9,14 +9,7 @@ def dfs(n, count):
         return
     
     for i in range(len(seq)):
-        if not tmp:
-            tmp.append(seq[i])
-            tmp2.add(i)
-            dfs(n + 1, count + 1)
-            tmp.pop()
-            tmp2.remove(i)
-
-        elif i not in tmp2:
+        if not tmp or i not in tmp2:
             tmp.append(seq[i])
             tmp2.add(i)
             dfs(n + 1, count + 1)
