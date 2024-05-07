@@ -8,6 +8,7 @@
 # 이 때 중복값을 고려해서 다음 원소가 다른 값이 올 때까지 1씩 더함으로써 계산 가능.
 # 이런 답이 떠오르지 않는 문제는 시간 절약을 위해 더 빨리 검색해봤어야 함.
 # 그동안 combinations을 쓸 수 있는 문제도 안 쓸 수 있으면 가급적 안 썼는데, 이런 부분집합 문제가 나오면 써야 할 듯.
+
 import sys
 from itertools import combinations
 input = sys.stdin.readline
