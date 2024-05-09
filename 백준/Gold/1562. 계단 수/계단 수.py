@@ -57,4 +57,3 @@ if __name__ == "__main__":
     bit_range = 1 << 10
 
     print(find_stair_num())
-    
