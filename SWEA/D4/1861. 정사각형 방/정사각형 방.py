@@ -22,6 +22,7 @@ def bfs(si, sj):
             if 0 <= ni < N and 0 <= nj < N and graph[ni][nj] == graph[ci][cj] + 1:
                 moved += 1
                 deq.append((ni, nj))
+                break
 
     return moved
 
