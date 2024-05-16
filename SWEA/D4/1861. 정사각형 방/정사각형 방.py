@@ -37,6 +37,9 @@ if __name__ == "__main__":
         
         for i in range(N):
             for j in range(N):
+                if max_moved > N * N - graph[i][j]:
+                    continue
+                
                 moved = bfs(i, j)
                 
                 if max_moved < moved:
