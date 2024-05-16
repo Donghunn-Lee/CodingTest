@@ -37,9 +37,10 @@ if __name__ == "__main__":
         
         for i in range(N):
             for j in range(N):
+                # 약소한 가지치기. 그런데 시간은 안 줄고 메모리만 줄어듬.
                 if max_moved > N * N - graph[i][j]:
                     continue
-                
+
                 moved = bfs(i, j)
                 
                 if max_moved < moved:
