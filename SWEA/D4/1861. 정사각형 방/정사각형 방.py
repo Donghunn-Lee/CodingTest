@@ -5,26 +5,24 @@
 # 매 방마다 딱 1씩 더 큰 방으로 이동할 수 있기 때문에 visited가 필요 없었음.
 # 모든 좌표에서 bfs를 돌리고, 이동 횟수를 리턴. 최대치를 저장해가며 같은 경우 더 작은 방 번호로 갱신함.
 
+# +++ 모든 방의 번호가 다 다르므로 덱에 cnt까지 요소 3개를 넣을 필요가 없었음. 그냥 발견시 +을 moved로 계산하면 됨.
 from collections import deque
 
 def bfs(si, sj):
     deq = deque()
-    deq.append((si, sj, 1))
-    moved = 0
+    deq.append((si, sj))
+    moved = 1
     
     while deq:
-        ci, cj, cnt = deq.popleft()
-
-        if moved < cnt:
-            moved = cnt
+        ci, cj = deq.popleft()
 
         for di, dj in ((0, 1), (1, 0), (0, -1), (-1, 0)):
             ni, nj = ci + di, cj + dj
 
-            if 0 <= ni < N and 0 <= nj < N:
-                if graph[ni][nj] == graph[ci][cj] + 1:
-                    deq.append((ni, nj, cnt + 1))
-    
+            if 0 <= ni < N and 0 <= nj < N and graph[ni][nj] == graph[ci][cj] + 1:
+                moved += 1
+                deq.append((ni, nj))
+
     return moved
 
 
