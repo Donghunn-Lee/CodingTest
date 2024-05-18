@@ -25,5 +25,4 @@ if __name__ == "__main__":
         right += x_list[i + 1] * y_list[i]
     
     ans = round(abs(left - right) / 2, 1)
-
     print(ans)
