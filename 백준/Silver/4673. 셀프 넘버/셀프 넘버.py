@@ -13,7 +13,6 @@ def get_self_num(n):
     return tmp
 
 def sol(seq):
-    
 
     for i in range(1, 10001):
         if seq[i]:
