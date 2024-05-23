@@ -1,5 +1,9 @@
 # 수 나누기 게임
 
+# 딱 소수 구하는 문제인 줄은 몰랐고 dp인 줄 알았음.
+# 그런데 dp로 어떻게 하지? 하고 분류를 바로 봣는데 에라토스테네스의 체와 비슷한 방식으로 구하는 것이었음.
+# 크게 도움이 될 만한 문제는 아니라 생각하여 적당히 이해만 하고 넘어감.
+
 import sys
 input = sys.stdin.readline
 
@@ -9,7 +13,6 @@ if __name__ == "__main__":
     l = []
     answer = dict()
     maxNum = 0
-
 
     # 입력
     for i, num in enumerate(seq):
