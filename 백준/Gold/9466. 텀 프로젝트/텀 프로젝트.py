@@ -6,7 +6,7 @@
 # index를 생각하긴 했는데, 조금 모자라고 시간도 이미 너무 많이 써서 찾아보니 index로 훨씬 간단하게 풀 수 있었음.
 
 import sys
-sys.setrecursionlimit(100000)
+sys.setrecursionlimit(200000)
 input = sys.stdin.readline
 
 def dfs(cur):
