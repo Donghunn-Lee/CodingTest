@@ -10,7 +10,6 @@
 # 문을 발견한 경우, 맞는 열쇠가 있다면 사용해서 문을 통과해 탐색하고, 없다면 문 정보를 딕셔너리에 저장함.
 # 이후 열쇠를 발견했을 때, 방문한 문들 중 열쇠에 맞는 문이 있다면 해당 좌표를 deq에 넣어 문을 통과해 탐색을 진행.
 # 이 방법을 사용해 visited를 초기화할 필요가 없으므로 초기화하는 코드의 3할 수준으로 시간 단축.
-
 import sys
 from collections import deque
 input = sys.stdin.readline
