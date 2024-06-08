@@ -1,5 +1,4 @@
 # 동전 0
-
 import sys
 input = sys.stdin.readline
 
