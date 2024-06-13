@@ -30,7 +30,6 @@ def bfs(si, sj):
     else:
         return "TT"
 
-
 if __name__ == "__main__":
     N, M = map(int, input().split())
     graph = [input().rstrip() for _ in range(N)]
