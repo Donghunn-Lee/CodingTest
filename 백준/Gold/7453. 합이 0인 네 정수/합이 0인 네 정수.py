@@ -35,7 +35,7 @@ def two_pointer():
             ans += (nxt_left - left) * (right - nxt_right)
             left, right = nxt_left, nxt_right
         
-
+        # 합이 0이 아니라면, 양수인지 음수인지에 따라 포인터를 이동.
         elif 0 < ab[left] + cd[right]:
             right -= 1
 
