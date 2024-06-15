@@ -17,15 +17,21 @@ def two_pointer():
 
     # 포인터가 ab와 cd의 범위를 벗어날 때까지 반복.
     while left < len_ab and 0 <= right:
+
+        # ab와 cd의 합이 0인 경우,
         if ab[left] + cd[right] == 0:
+
+            # 각 배열 내 중복값이 있을 수 있으므로 이를 위한 nxt 변수 생성.
             nxt_left, nxt_right = left + 1, right - 1
 
+            # 중복값이 있는 경우, 합 비교 없이 포인터를 이동.
             while nxt_left < len_ab and ab[left] == ab[nxt_left]:
                 nxt_left += 1
             
             while 0 <= nxt_right and cd[right] == cd[nxt_right]:
                 nxt_right -= 1
             
+            # 중복값을 찾아 이동한 포인터의 차를 계산하여 나올 수 있는 모든 경우의 수를 계산.
             ans += (nxt_left - left) * (right - nxt_right)
             left, right = nxt_left, nxt_right
         
