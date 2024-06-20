@@ -15,7 +15,6 @@ def word_sort(words):
 
     return "\n".join(ans)
 
-
 if __name__ == "__main__":
     N = int(input())
     words = [input().rstrip() for _ in range(N)]
