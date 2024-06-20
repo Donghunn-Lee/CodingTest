@@ -31,7 +31,6 @@ def like_chess():
     
     return ans
 
-
 if __name__ == "__main__":
     N, M = map(int, input().split())
     board = [input().rstrip() for _ in range(N)]
