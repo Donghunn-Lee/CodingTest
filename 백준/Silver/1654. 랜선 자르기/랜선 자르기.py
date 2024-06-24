@@ -22,9 +22,7 @@ def max_cable():
         else:
             right = length
 
-
     return max_length
-
 
 if __name__ == "__main__":
     K, N = map(int, input().split())
