@@ -26,7 +26,6 @@ def print_q():
                 length -= 1
                 cnt += 1
 
-
 if __name__ == "__main__":
     T = int(input())
     ans = []
