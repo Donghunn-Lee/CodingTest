@@ -1,42 +1,24 @@
-# 프린터 큐
-
-import sys
 from collections import deque
-input = sys.stdin.readline
+import sys
 
-def print_q():
-    cnt = 1
-    length = N
-    while True:
-        i = 1
+t = int(input())
 
-        while i < length:
-            if que[0][1] < que[i][1]:
-                que.append(que.popleft())
+for i in range(t):
+    n, m = map(int, input().split())
+    queue = deque(list(map(int, sys.stdin.readline().split())))
+    count = 0
+    while queue:
+        best = max(queue)  #현재의 최댓값이 가장 먼저 배출되므로 최댓값을 저장
+        front = queue.popleft() # 큐의 front를 뽑았으므로
+        m -= 1 # 내 위치가 한 칸 당겨진다.
+
+        if best == front: # 뽑은 숫자가 제일 큰 숫자일 때
+            count += 1 # 하나가 영원히 배출되므로 순번 하나 추가
+            if m < 0: # m이 0이라는 것은 뽑은 숫자가 내 숫자라는 뜻.
+                print(count)
                 break
-            
-            i += 1
-        
-        else:
-            if que[0][0] == M:
-                return cnt
-            
-            else:
-                que.popleft()
-                length -= 1
-                cnt += 1
 
-if __name__ == "__main__":
-    T = int(input())
-    ans = []
-
-    for _ in range(T):
-        N, M = map(int, input().split())
-        files = list(map(int, input().split()))
-        que = deque([[i] for i in range(N)])
-        for i in range(N):
-            que[i].append(files[i])
-        
-        ans.append(str(print_q()))
-    
-    print("\n".join(ans))
+        else:   # 뽑은 숫자가 제일 큰 숫자가 아니면
+            queue.append(front) # 제일 뒤로 밀려나게 됨
+            if m < 0 :  # 제일 앞에서 뽑히면
+                m = len(queue) - 1 # 제일 뒤로 이동
