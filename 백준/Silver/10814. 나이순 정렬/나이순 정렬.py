@@ -1,5 +1,4 @@
 # 나이순 정렬
-
 import sys
 input = sys.stdin.readline
 
