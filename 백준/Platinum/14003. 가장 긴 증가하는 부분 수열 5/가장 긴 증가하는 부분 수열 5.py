@@ -40,6 +40,8 @@ def cal_LIS(seq):
     last_idx = len(LIS) - 1
     ans = []
 
+    # 역추적.
+    # 뒤에서부터 다음 인덱스의 수가 발견될 때마다 ans리스트에 추가.
     for i in range(len(dp) - 1, -1, -1):
         if dp[i][0] == last_idx:
             ans.append(dp[i][1])
@@ -55,4 +57,3 @@ if __name__ == "__main__":
     A = list(map(int, input().split()))
 
     print(cal_LIS(A))
-    
