@@ -6,7 +6,6 @@ input = sys.stdin.readline
 def sol(n, k):
     seq = list(range(1, N + 1))
     ans = []
-
     cur, cnt, total = 0, 0, 0
 
     while total < n:
@@ -25,7 +24,6 @@ def sol(n, k):
         cur += 1
     
     return '<' + ", ".join(map(str, ans)) + ">"
-
 
 if __name__ == "__main__":
     N, K = map(int, input().split())
