@@ -4,7 +4,6 @@
 # SAFE ZONE 설치의 요는 그래프 내에서 발생한 사이클과 관련 있다는 것.
 # 멈추지 못하고 계속 반복된다는 것은 사이클이 존재한다는 것이며, 그 사이클을 끊는 지점이 SAFE ZONE.
 # 따라서 dfs로 모든 지점에서 발생할 수 있는 사이클을 찾고, 그 사이클의 수가 곧 SAFE ZONE의 수가 됨.
-
 import sys
 input = sys.stdin.readline
 
