@@ -6,7 +6,6 @@
 # 어떤 집합에 포함되는 노드는 모두 해당 인덱스에 root 노드의 값을 가짐.
 # 이 root를 찾아 할당하는 과정이 find 이고, 다른 root를 가진 집합의 연결시 실행하는 게 union.
 # 이 문제도 기초적인 union-find 문제인 듯해서 그나마 쉽게 이해할 수 있었음.
-
 import sys
 input = sys.stdin.readline
 
@@ -20,13 +19,12 @@ def union(x, y):
     parent_x = find(x)
     parent_y = find(y)
 
-    if parent_x == parent_y:
-        return True
-
     if parent_x < parent_y:
         parents[parent_y] = parent_x
-    else:
+    elif parent_x > parent_y:
         parents[parent_x] = parent_y
+    else:
+        return True
 
     return False
 
