@@ -7,7 +7,6 @@
 # 먼저 전제 graph에서 인접한 모든 이동 가능한 칸을 section으로 구분하고, visited에 sections 번호를 할당함.
 # section 번호마다 해당 section내 칸의 수를 딕셔너리로 저장. dp테이블이 되는 셈.
 # section을 모두 구한 다음, 다시 완전탐색으로 벽을 찾고, 해당 벽과 인접한 구역을 visited로 찾아 칸의 수를 더함.
-
 import sys
 from collections import deque
 input = sys.stdin.readline
