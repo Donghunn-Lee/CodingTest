@@ -61,7 +61,7 @@ if __name__ == "__main__":
     section_num = 0
     ans = [[0] * M for _ in range(N)]
 
-    # 구역과 구역 내 칸 수 구하기.
+    # 구역 만들기.
     for i in range(N):
         for j in range(M):
             if graph[i][j] == '0' and not visited[i][j]:
