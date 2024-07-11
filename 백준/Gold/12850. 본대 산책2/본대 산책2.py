@@ -32,7 +32,6 @@ def power(a, n):
 
     if n % 2 == 0:
         return mul_matrix(tmp, tmp)
-    
     else:
         return mul_matrix(mul_matrix(tmp, tmp), a)
 
