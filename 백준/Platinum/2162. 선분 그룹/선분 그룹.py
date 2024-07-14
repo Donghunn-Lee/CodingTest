@@ -6,6 +6,7 @@
 # 판별한 값으로 union-find를 실행. root 선분을 기록하며 선분 그룹을 생성.
 # 생성된 선분 그룹의 수와 크기가 가장 큰 그룹에 속한 선분의 개수를 출력.
 # union-find 자체는 단순한데, 선부의 교차판별이 핵심이었던 문제. 검색 후 이해하는데 시간이 좀 걸림. ccw는 70% 이해완.
+
 import sys
 input = sys.stdin.readline
 
