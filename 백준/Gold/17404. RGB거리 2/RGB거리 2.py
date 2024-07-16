@@ -2,7 +2,6 @@
 
 # 전에 풀었던 rgb 거리 문제에서 처음과 끝의 조건이 추가된 문제.
 # 처음 시작 RGB를 정해서 시작하고, 마지막에 처음과 다른 값들을 대상으로 최소 비용을 구함.
-
 import sys
 input = sys.stdin.readline
 INF = 1e7
