@@ -57,7 +57,6 @@ if __name__ == "__main__":
     x_sort = sorted(planets, key = lambda x : x[0])
     y_sort = sorted(planets, key = lambda x : x[1])
     z_sort = sorted(planets, key = lambda x : x[2])
-    
     edges = []
     for i in range(N - 1):
         heapq.heappush(edges, (abs(x_sort[i][0] - x_sort[i + 1][0]), x_sort[i][3], x_sort[i + 1][3]))
