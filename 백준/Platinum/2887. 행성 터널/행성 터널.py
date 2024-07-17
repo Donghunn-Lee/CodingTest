@@ -23,13 +23,11 @@ def cal_distance(a, b):
 
     return min(abs(x1 - x2), abs(y1 - y2), abs(z1 - z2))
 
-
 def find(x):
     if x != root[x]:
         root[x] = find(root[x])
 
     return root[x]
-
 
 def kruskal():
     cnt, min_weight = 0, 0
@@ -50,7 +48,6 @@ def kruskal():
             cnt += 1
 
     return min_weight
-
 
 if __name__ == "__main__":
     N = int(input())
