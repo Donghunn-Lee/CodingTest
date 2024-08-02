@@ -3,7 +3,7 @@ function solution(players, callings) {
     players.forEach((e, idx) => players_dict[e] = idx);
     
     for (const name of callings) {
-        idx = players_dict[name]
+        let idx = players_dict[name]
         let tmp = players[idx - 1];
 
         players[idx - 1] = name;
