@@ -4,7 +4,6 @@ function solution(players, callings) {
     
     for (const name of callings) {
         let tmp = players[players_dict[name] - 1];
-        let tmp_dict = players_dict[name];
 
         players[players_dict[name] - 1] = name;
         players[players_dict[name]] = tmp;
