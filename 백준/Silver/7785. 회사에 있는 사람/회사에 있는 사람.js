@@ -16,4 +16,10 @@ for(let i = 1; i <= n; i++) {
 }
 const a = 'a'.toLocaleLowerCase
 
-console.log([...set].sort().reverse().join('\n'))
+console.log([...set].sort((a, b) => {
+    if (a < b) {
+        return 1;
+    } else {
+        return -1;
+    }
+}).join('\n'))
