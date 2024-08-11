@@ -1,30 +1,30 @@
-// 색종이
-
 const fs = require("fs");
 
-const input = fs
-  .readFileSync(process.platform === "linux" ? "/dev/stdin" : "./input.txt")
-  .toString()
-  .trim()
-  .split("\n");
+// example.txt 파일에서 데이터를 읽어옴
+let input = fs.readFileSync(0).toString().trim().split("\n");
 
-function sol() {
-    const N = +input.shift();
-    const colorPapers = input.map((e) => e.split(" ").map(Number));
-    const covered = new Set();
-
-    for (const colorPaper of colorPapers) {
-        const marginLeft = colorPaper[0];
-        const marginBottom = 100 - colorPaper[1];
-        
-        for (let i = marginLeft; i < marginLeft + 10; i++) {
-            for (let j = marginBottom - 10; j < marginBottom; j++){
-                covered.add([i, j].join(" "));
-            }
-        }
-    }
-
-    return covered.size;
+let arr = [];
+for (var i = 0; i < 101; i++) {
+  arr.push(new Array(101).fill(false));
 }
 
-console.log(sol());
+let n = Number(input[0]);
+for (var i = 0; i < n; i++) {
+  let x = parseInt(input[i + 1].split(" ")[0].trim());
+  let y = parseInt(input[i + 1].split(" ")[1].trim());
+
+  for (var j = x; j < x + 10; j++) {
+    for (var k = y; k < y + 10; k++) {
+      arr[k][j] = true;
+    }
+  }
+}
+
+let result = 0;
+for (var i = 1; i < 101; i++) {
+  for (var j = 1; j < 101; j++) {
+    if (arr[i][j]) result++;
+  }
+}
+
+console.log(result);
