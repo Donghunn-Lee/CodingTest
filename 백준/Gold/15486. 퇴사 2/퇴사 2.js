@@ -14,13 +14,13 @@ function sol() {
         P.push(e[1]);
     }
 
+    let max = 0;
+
     for (let i = 0; i < N; i++) {
-        if (0 < i) {
-            dp[i] = Math.max(dp[i], dp[i - 1]);
-        }
+        max = Math.max(max, dp[i])
 
         if (dp[i + T[i]] !== undefined){
-            dp[i + T[i]] = Math.max(dp[i + T[i]], dp[i] + P[i])
+            dp[i + T[i]] = Math.max(dp[i + T[i]], max + P[i])
         }
 
     }
