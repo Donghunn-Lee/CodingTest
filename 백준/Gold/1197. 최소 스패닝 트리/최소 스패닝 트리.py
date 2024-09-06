@@ -7,7 +7,7 @@
 # 우선 처음 보는 문제라 알고리즘을 거의 붙여넣었지만 일단 70%는 이해한 듯.
 import sys
 input = sys.stdin.readline
-
+sys.setrecursionlimit(100000)
 # root 노드를 찾아 갱신.
 def find(n):
     if n != roots[n]:
