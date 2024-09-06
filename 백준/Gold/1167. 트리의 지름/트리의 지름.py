@@ -9,7 +9,7 @@
 # +++ 난 dfs로 풀었는데 왜 또 다들 bfs로 푼 걸까. 이런 문제에서 어떤 점이 bfs가 더 효율적이라고 판단되는 기준인지 아직도 잘 모르겠음.
 import sys
 input = sys.stdin.readline
-
+sys.setrecursionlimit(1000000)
 # first와 그냥의 차이는 코드 내 edge의 유무.
 def dfs_first(graph, visited, start, distance):
     global max_dis
