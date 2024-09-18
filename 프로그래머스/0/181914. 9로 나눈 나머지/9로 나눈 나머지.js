@@ -1,9 +1,3 @@
 function solution(number) {
-    let sum = 0;
-    
-    for (let i of number) {
-        sum += Number(i);
-    }
-    
-    return sum % 9;
+    return [...number].reduce((acc, val) => acc + Number(val), 0) % 9;
 }
