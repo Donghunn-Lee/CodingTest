@@ -1,3 +1,9 @@
+// 안전 영역
+
+// js로는 아직 거의 풀어본 적 없는 그래프 문제.
+// 거의 처음 풀어보는 거다 보니 어떤 식으로 풀어야 깔끔할지를 좀 찾아보고 괜찮아 보이는 코드를 하나하나 이해해가며, 아주 살짝만 내 입맛대로 바꿔서 작성함.
+// dfs는 그렇다 치는데, 파이썬에서 deque를 썼던 bfs는 정말 귀찮을 것 같은데 걱정임.
+
 const filePath = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 const input = require("fs")
   .readFileSync(filePath)
