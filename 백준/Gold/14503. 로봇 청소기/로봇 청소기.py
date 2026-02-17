@@ -1,49 +1,47 @@
-# 14503 로봇 청소기
-
 import sys
 input = sys.stdin.readline
 
 def solve():
     N, M = map(int, input().split())
-    robot = list(map(int, input().split()))
+    r, c, d = map(int, input().split())
     room = [list(map(int, input().split())) for _ in range(N)]
-    answer = 0
 
     # 북(0), 동(1), 남(2), 서(3)
-    dir = [(-1, 0), (0, 1), (1, 0), (0, -1)]
+    dr = [-1, 0, 1, 0]
+    dc = [0, 1, 0, -1]
+
+    cleaned = 0
 
     while True:
-        ci, cj, cd = robot
-
         # 1. 현재 칸 청소
-        if room[ci][cj] == 0:
-            room[ci][cj] = -1
-            answer += 1
+        if room[r][c] == 0:
+            room[r][c] = 2
+            cleaned += 1
 
         found = False
 
-        # 2. 왼쪽 회전 4번
+        # 2. 네 방향 탐색 (왼쪽 회전)
         for _ in range(4):
-            cd = (cd + 3) % 4  # 왼쪽 회전
-            di, dj = dir[cd]
-            ni, nj = ci + di, cj + dj
+            d = (d + 3) % 4  # 왼쪽 회전
+            nr = r + dr[d]
+            nc = c + dc[d]
 
-            if room[ni][nj] == 0:
-                robot = [ni, nj, cd]
+            if room[nr][nc] == 0:
+                r, c = nr, nc
                 found = True
                 break
 
-        # 3. 네 방향 모두 실패 → 뒤로 이동
+        # 3. 네 방향 모두 청소 or 벽
         if not found:
-            di, dj = dir[(cd + 2) % 4]
-            ni, nj = ci + di, cj + dj
+            back_dir = (d + 2) % 4
+            br = r + dr[back_dir]
+            bc = c + dc[back_dir]
 
-            if room[ni][nj] != 1:
-                robot = [ni, nj, cd]
-            else:
+            if room[br][bc] == 1:
                 break
+            r, c = br, bc
 
-    print(answer)
+    print(cleaned)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     solve()
