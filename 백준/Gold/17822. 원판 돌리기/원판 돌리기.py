@@ -5,7 +5,6 @@ input = sys.stdin.readline
 
 
 def spin(circle, d, k):
-  k %= len(circle)
   if d == 0:
     circle[:] = circle[-k:] + circle[:-k]
   else:
