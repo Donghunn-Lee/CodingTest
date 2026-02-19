@@ -1,68 +1,44 @@
-# 14499 주사위 굴리기
-
 import sys
 input = sys.stdin.readline
 
-def move(dice, dir, bottom):
-  if dir == 1:
-    tmp = dice[0][2]
-    dice[0] = [bottom] + dice[0][:2]
-    dice[1][1] = dice[0][1]
-    bottom = tmp
-  elif dir == 2:
-    tmp = dice[0][0]
-    dice[0] = dice[0][1:] + [bottom]
-    dice[1][1] = dice[0][1]
-    bottom = tmp
-  elif dir == 3:
-    tmp = dice[1][0]
-    dice[1] = dice[1][1:] + [bottom]
-    dice[0][1] = dice[1][1]
-    bottom = tmp
-  else:
-    tmp = dice[1][2]
-    dice[1] = [bottom] + dice[1][:2]
-    dice[0][1] = dice[1][1]
-    bottom = tmp
-  
-  return bottom
-
-
 def solve():
-  N, M, x, y, K = map(int, input().split())
-  board = [list(map(int, input().split())) for _ in range(N)]
-  cmds = list(map(int, input().split()))
-  dx = [0, 1, -1, 0, 0]
-  dy = [0, 0, 0, -1, 1]
-  ci, cj = x, y
+    N, M, x, y, K = map(int, input().split())
+    board = [list(map(int, input().split())) for _ in range(N)]
+    cmds = list(map(int, input().split()))
 
-  # 가로 + 세로 + 밑면으로 주사위 관리
-  # [[4, 1, 3] 가로
-  # ,[2, 1, 5]] 세로
-  # 6 밑면
-  dice = [[0] * 3 for _ in range(2)]
-  bottom = 0
+    # 0: 위, 1: 아래, 2: 북, 3: 남, 4: 서, 5: 동
+    dice = [0] * 6
 
-  result = []
+    # 동, 서, 북, 남
+    dx = [0, 0, 0, -1, 1]
+    dy = [0, 1, -1, 0, 0]
 
-  for cmd in cmds:
-    ni, nj = ci + dy[cmd], cj + dx[cmd]
+    for cmd in cmds:
+        nx = x + dx[cmd]
+        ny = y + dy[cmd]
 
-    if 0 <= ni < N and 0 <= nj < M:
-      bottom = move(dice, cmd, bottom)
+        if not (0 <= nx < N and 0 <= ny < M):
+            continue
 
-      if board[ni][nj] == 0:
-        board[ni][nj] = bottom
-      else :
-        bottom = board[ni][nj]
-        board[ni][nj] = 0
-      
-      result.append(dice[0][1])
-      ci, cj = ni, nj
+        t, b, n, s, w, e = dice
 
+        if cmd == 1:      # 동
+            dice = [w, e, n, s, b, t]
+        elif cmd == 2:    # 서
+            dice = [e, w, n, s, t, b]
+        elif cmd == 3:    # 북
+            dice = [s, n, t, b, w, e]
+        else:             # 남
+            dice = [n, s, b, t, w, e]
 
+        if board[nx][ny] == 0:
+            board[nx][ny] = dice[1]
+        else:
+            dice[1] = board[nx][ny]
+            board[nx][ny] = 0
 
-  print('\n'.join(map(str, result)))
+        print(dice[0])
+        x, y = nx, ny
 
-if __name__ == '__main__':
-  solve()
+if __name__ == "__main__":
+    solve()
