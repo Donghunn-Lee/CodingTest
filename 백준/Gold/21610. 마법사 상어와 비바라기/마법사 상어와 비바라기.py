@@ -1,49 +1,48 @@
+# 21610 마법사 상어와 비바라기
+
 import sys
 input = sys.stdin.readline
 
-N, M = map(int, input().split())
-A = [list(map(int, input().split())) for _ in range(N)]
+def solve():
+  N, M = map(int, input().split())
+  board = [list(map(int, input().split())) for _ in range(N)]
+  cmds = [list(map(int, input().split())) for _ in range(M)]
+  dx = [0, -1, -1, 0, 1, 1, 1, 0, -1]
+  dy = [0, 0, -1, -1, -1, 0, 1, 1, 1]
+  cross_dir = [2, 4, 6, 8]
+  
+  cloud = [[N - 1, 0], [N - 1, 1], [N - 2, 0], [N - 2, 1]]
+  for d, s in cmds:
+    increased = [[False] * N for _ in range(N)]
+  
+    for i in range(len(cloud)):
+      ni = (cloud[i][0] + dy[d] * s) % N
+      nj = (cloud[i][1] + dx[d] * s) % N
+      cloud[i] = [ni, nj]
+      board[ni][nj] += 1
+      increased[ni][nj] = True
 
-moves = []
-for _ in range(M):
-    d, s = map(int, input().split())
-    moves.append((d - 1, s))
+    for i, j in cloud:
+      cross_water = 0
 
-dx = [0, -1, -1, -1, 0, 1, 1, 1]
-dy = [-1, -1, 0, 1, 1, 1, 0, -1]
+      for cd in cross_dir:
+        nci = i + dy[cd]
+        ncj = j + dx[cd]
 
-diag = [(-1, -1), (-1, 1), (1, -1), (1, 1)]
+        if 0 <= nci < N and 0 <= ncj < N and board[nci][ncj] > 0:
+          cross_water += 1
+      
+      board[i][j] += cross_water
+    
+    cloud = []
 
-# 초기 구름
-clouds = [(N-1,0),(N-1,1),(N-2,0),(N-2,1)]
-
-for d, s in moves:
-    cloud_map = [[False]*N for _ in range(N)]
-    new_clouds = []
-
-    # 구름 이동 + 비
-    for x, y in clouds:
-        nx = (x + dx[d]*s) % N
-        ny = (y + dy[d]*s) % N
-        A[nx][ny] += 1
-        cloud_map[nx][ny] = True
-        new_clouds.append((nx, ny))
-
-    # 물복사
-    for x, y in new_clouds:
-        cnt = 0
-        for ddx, ddy in diag:
-            nx, ny = x + ddx, y + ddy
-            if 0 <= nx < N and 0 <= ny < N and A[nx][ny] > 0:
-                cnt += 1
-        A[x][y] += cnt
-
-    # 새 구름 생성
-    clouds = []
     for i in range(N):
-        for j in range(N):
-            if not cloud_map[i][j] and A[i][j] >= 2:
-                A[i][j] -= 2
-                clouds.append((i, j))
+      for j in range(N):
+        if board[i][j] >= 2 and not increased[i][j]:
+          board[i][j] -= 2
+          cloud.append([i, j])
 
-print(sum(map(sum, A)))
+  print(sum(map(sum, board)))
+
+if __name__ == '__main__':
+  solve()
