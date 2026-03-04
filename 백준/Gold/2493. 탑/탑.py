@@ -1,34 +1,24 @@
-# 2493 탑
-
 import sys
 input = sys.stdin.readline
 
-
-
 def solve():
-  N = int(input())
-  towers = list(map(int, input().split()))
-  towers.reverse()
-  result = [0] * N
-  stack = []
+    N = int(input())
+    towers = list(map(int, input().split()))
 
-  for i in range(N):
-    if len(stack) == 0:
-      stack.append([i, towers[i]])
-      continue
+    stack = []
+    result = []
 
-    while len(stack) > 0 and stack[-1][1] <= towers[i]:
-      idx = stack.pop()[0]
-      result[idx] = N - i
+    for i, h in enumerate(towers, 1):
+        while stack and stack[-1][1] < h:
+            stack.pop()
 
-    stack.append([i, towers[i]])
+        if stack:
+            result.append(stack[-1][0])
+        else:
+            result.append(0)
 
-  result.reverse()
+        stack.append((i, h))
 
-  print(' '.join(map(str, result)))
+    print(*result)
 
-
-
-
-if __name__ == '__main__':
-  solve()
+solve()
